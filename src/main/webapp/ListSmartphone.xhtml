@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<div class="card">
+		<h:form>
+
+
+			<p:panel header="Select a User" style="margin-bottom:10px;">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel for="selectedOption" value="User: " />
+					<p:selectOneMenu id="selectedOption"
+						value="#{userController.selectedOption}" style="width:150px">
+						<p:ajax listener="#{userController.change}" />
+						<f:selectItem itemLabel="Select User" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{userController.options}" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+
+				<p:divider />
+				<p:commandButton value="Submit"
+					action="#{userController.onSubmit}" icon="pi pi-check" />
+
+			</p:panel>
+		</h:form>
+		<p:dataTable id="smartphones" var="smartphone"
+			value="#{userController.phones}" rowKey="#{smartphone.id}">
+			<f:facet name="header">
+                tableau des smartphones
+            </f:facet>
+			<p:column headerText="ref">
+				<h:outputText value="#{smartphone.ref}" />
+			</p:column>
+			<p:column headerText="Name">
+				<h:outputText value="#{smartphone.name}" />
+			</p:column>
+			<p:column headerText="marque">
+				<h:outputText value="#{smartphone.marque}" />
+			</p:column>
+		</p:dataTable>
+
+		<p:gmap id="mymap" center="36.890257,30.707417" zoom="3" type="HYBRID"
+				style="width:100%;height:400px"
+				model="#{userController.simpleModel}" />
+	</div>
+</h:body>
+</html>
